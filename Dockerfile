@@ -18,7 +18,7 @@ RUN apk add --no-cache openjdk8-jre bash git python bash openssh-client go\
   && /google-cloud-sdk/install.sh --usage-reporting=true --path-update=true --command-completion=false 
 
 ADD ./build_kubectl.sh /tmp/
-RUN /tmp/build_kubectl.sh 1.1.7 \
+RUN /tmp/build_kubectl.sh 1.2.2 \
   && apk del --no-cache go \
   && rm -rf /tmp/gcp_install
 
