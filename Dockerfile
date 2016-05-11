@@ -4,7 +4,7 @@ MAINTAINER Paul Tinsley <paul.tinsley@gmail.com>
 ENV SLAVE_JAR_URI 'http://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/2.53.2/remoting-2.53.2.jar'
 
 
-RUN apk add --no-cache openjdk8-jre bash git python bash openssh-client go\
+RUN apk add --no-cache openjdk8-jre bash git python py-openssl bash openssh-client go\
   && adduser -S -g "Jenkins user" -s bash -h /home/jenkins jenkins \
   && echo 'docker:x:107:jenkins' >> /etc/group \
   && mkdir -p /usr/share/jenkins \
