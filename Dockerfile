@@ -1,7 +1,7 @@
 FROM alpine
 MAINTAINER Paul Tinsley <paul.tinsley@gmail.com>
 
-ENV SLAVE_JAR_URI 'http://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/2.53.2/remoting-2.53.2.jar'
+ENV SLAVE_JAR_URI 'http://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/2.59/remoting-2.59.jar'
 
 
 RUN apk add --no-cache openjdk8-jre bash git python bash openssh-client go gcc musl-dev libffi-dev openssl-dev python-dev wget py-pip\
@@ -20,7 +20,7 @@ RUN apk add --no-cache openjdk8-jre bash git python bash openssh-client go gcc m
   && apk del gcc musl-dev libffi-dev openssl-dev python-dev py-pip
 
 ADD ./build_kubectl.sh /tmp/
-RUN /tmp/build_kubectl.sh 1.2.2 \
+RUN /tmp/build_kubectl.sh 1.2.4 \
   && apk del --no-cache go \
   && rm -rf /tmp/gcp_install
 
