@@ -3,8 +3,7 @@ MAINTAINER Paul Tinsley <paul.tinsley@gmail.com>
 
 ENV SLAVE_JAR_URI 'http://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/2.62/remoting-2.62.jar'
 
-
-RUN apk add --no-cache openjdk8-jre bash git python bash openssh-client wget \
+RUN apk add --no-cache openjdk8 openjdk8-jre bash git python bash openssh-client wget libstdc++ \
   && apk add --no-cache -t build-deps gcc musl-dev libffi-dev openssl-dev python-dev py-pip \
   && pip install pyopenssl \
   && adduser -S -g "Jenkins user" -s bash -h /home/jenkins jenkins \
@@ -20,6 +19,22 @@ RUN apk add --no-cache openjdk8-jre bash git python bash openssh-client wget \
   && /google-cloud-sdk/install.sh -q --additional-components kubectl --usage-reporting=true --path-update=true --command-completion=false  \
   && apk del -q --no-cache build-deps \
   && rm -rf /tmp/*
+
+ENV IVY_HOME /cache
+ENV GRADLE_VERSION 2.12
+ENV GRADLE_HOME /usr/local/gradle
+ENV PATH ${PATH}:${GRADLE_HOME}/bin
+ENV GRADLE_USER_HOME /gradle
+# TODO
+# discover/set JAVA_HOME programattically
+ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk/
+WORKDIR /usr/local
+
+RUN wget https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip \
+  && unzip gradle-$GRADLE_VERSION-bin.zip \
+  && rm -f gradle-$GRADLE_VERSION-bin.zip \
+  && ln -s gradle-$GRADLE_VERSION gradle \
+  && mkdir -p /gradle && mkdir -p /app
 
 RUN for z in `ls /google-cloud-sdk/bin`; do ln -s /google-cloud-sdk/bin/$z /bin/$z; done 
 
