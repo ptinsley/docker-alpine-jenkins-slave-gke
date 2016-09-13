@@ -25,7 +25,7 @@ ENV GRADLE_VERSION 2.12
 ENV GRADLE_HOME /usr/local/gradle
 ENV PATH ${PATH}:${GRADLE_HOME}/bin
 # TODO
-# discover/set JAVA_HOME programattically
+# discover/set JAVA_HOME programmatically
 ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk/
 WORKDIR /usr/local
 
