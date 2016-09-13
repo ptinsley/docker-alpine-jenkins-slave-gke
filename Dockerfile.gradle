@@ -24,7 +24,6 @@ ENV IVY_HOME /cache
 ENV GRADLE_VERSION 2.12
 ENV GRADLE_HOME /usr/local/gradle
 ENV PATH ${PATH}:${GRADLE_HOME}/bin
-ENV GRADLE_USER_HOME /gradle
 # TODO
 # discover/set JAVA_HOME programattically
 ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk/
@@ -33,8 +32,7 @@ WORKDIR /usr/local
 RUN wget https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip \
   && unzip gradle-$GRADLE_VERSION-bin.zip \
   && rm -f gradle-$GRADLE_VERSION-bin.zip \
-  && ln -s gradle-$GRADLE_VERSION gradle \
-  && mkdir -p /gradle && mkdir -p /app
+  && ln -s gradle-$GRADLE_VERSION gradle
 
 RUN for z in `ls /google-cloud-sdk/bin`; do ln -s /google-cloud-sdk/bin/$z /bin/$z; done 
 
