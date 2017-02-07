@@ -1,7 +1,7 @@
 FROM alpine
 MAINTAINER Paul Tinsley <paul.tinsley@gmail.com>
 
-ENV SLAVE_JAR_URI 'http://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/2.62/remoting-2.62.jar'
+ENV SLAVE_JAR_URI 'http://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/2.62.5/remoting-2.62.5.jar'
 
 RUN apk add --no-cache openjdk8 openjdk8-jre bash git python bash openssh-client wget libstdc++ \
   && apk add --no-cache -t build-deps gcc musl-dev libffi-dev openssl-dev python-dev py-pip \
